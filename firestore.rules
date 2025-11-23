@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Rules for guests collection
+    match /guests/{document=**} {
+      // Anyone can read the guest list
+      allow read: if true;
+      
+      // Anyone can write (add new RSVP)
+      allow write: if true;
+      
+      // For production, you might want to add rate limiting or validation
+      // Example: allow write: if request.resource.data.name is string;
+    }
+  }
+}
+
